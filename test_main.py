@@ -8,7 +8,9 @@ client = TestClient(app)
 @pytest.fixture(autouse=True)
 def resetar_banco():
     db_musicas.clear()
-    db_musicas[1] = Musica(titulo="Bohemian Rhapsody", artista="Queen", duracao=5.9)
+    db_musicas[1] = Musica(titulo="Bohemian Rhapsody",
+                           artista="Queen",
+                           duracao=5.9)
 
 def test_get_musica_existente():
     response = client.get("/musicas/1")
@@ -23,12 +25,15 @@ def test_post_criar_musica_valida():
 
 def test_post_bloquear_duracao_invalida():
     musica_invalida = {"titulo": "Erro", "artista": "Banda", "duracao": -2.0}
-    response = client.post("/musicas/3", json=musica_invalida)
+    response = client.post("/musicas/3",
+                           json=musica_invalida)
     assert response.status_code == 400
     assert response.json()["detail"] == "A duração deve ser maior que zero"
 
 def test_put_atualizar_musica():
-    musica_atualizada = {"titulo": "Bohemian Rhapsody (Remastered)", "artista": "Queen", "duracao": 6.0}
+    musica_atualizada = {"titulo": "Bohemian Rhapsody (Remastered)",
+                         "artista": "Queen",
+                         "duracao": 6.0}
     response = client.put("/musicas/1", json=musica_atualizada)
     assert response.status_code == 200
     assert db_musicas[1].duracao == 6.0
