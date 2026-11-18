@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: 1. Baixar código do repositório
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: 2. Instalar e configurar o uv
-        uses: astral-sh/setup-uv@v4
+        uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
 
