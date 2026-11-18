@@ -8,7 +8,7 @@ on:
 
 jobs:
   testes-automatizados:
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu 26
 
     steps:
       - name: 1. Baixar código do repositório
