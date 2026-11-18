@@ -1,0 +1,26 @@
+name: Quality Gate - VibeMusic API (uv)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  testes-automatizados:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Baixar código do repositório
+        uses: actions/checkout@v4
+
+      - name: 2. Instalar e configurar o uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: 3. Instalar dependências do projeto
+        run: uv sync --locked
+
+      - name: 4. Executar suíte de testes (Pytest)
+        run: uv run pytest -v
